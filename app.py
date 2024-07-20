@@ -10,7 +10,6 @@ class Encrypt:
         try:
             data = json.loads(web.data())
             
-            # Obtendo a chave e a versão do Adyen do corpo da requisição POST
             adyen_key = data.get("adyen_key", "null")  # Chave Adyen
             adyen_version = data.get("adyen_version", "_0_1_8")  # Versão Adyen
             
@@ -28,9 +27,13 @@ class Encrypt:
         except Exception as e:
             return json.dumps({"success": False, "error": str(e)})
 
+print("Configuring web.py application...")
 app = web.application(urls, globals())
+print("Application configured, ready to run.")
 
 if __name__ == "__main__":
+    print("Starting CherryPyWSGIServer on port 443")
     CherryPyWSGIServer.ssl_certificate = "/path/to/your/certificate.pem"
     CherryPyWSGIServer.ssl_private_key = "/path/to/your/privatekey.pem"
     app.run(port=443)
+    print("Server is running on port 443")
