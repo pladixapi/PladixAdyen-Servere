@@ -7,5 +7,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 80 443
+EXPOSE 80
 CMD ["python3", "app.py"]

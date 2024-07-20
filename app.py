@@ -1,7 +1,6 @@
 import web
 import json
 from encryptor import encryptor  # Certifique-se de que a classe encryptor esteja no mesmo diretório ou instalada como um pacote
-from web.wsgiserver import CherryPyWSGIServer
 
 urls = ("/encrypt", "Encrypt")
 
@@ -32,8 +31,6 @@ app = web.application(urls, globals())
 print("Application configured, ready to run.")
 
 if __name__ == "__main__":
-    print("Starting CherryPyWSGIServer on port 443")
-    CherryPyWSGIServer.ssl_certificate = "/path/to/your/certificate.pem"
-    CherryPyWSGIServer.ssl_private_key = "/path/to/your/privatekey.pem"
-    app.run(port=443)
-    print("Server is running on port 443")
+    print("Starting server on port 80")
+    app.run(port=80)
+    print("Server is running on port 80")
