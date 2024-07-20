@@ -26,4 +26,9 @@ def encrypt():
         return jsonify({"success": False, "error": str(e)})
 
 if __name__ == "__main__":
-    app.run(host=0.0.0.0)
+    print("Starting Flask server on port 80...")
+    try:
+        app.run(host=0.0.0.0, port=80)
+        print("Flask server is running on port 80")
+    except Exception as e:
+        print(f"Failed to start Flask server: {str(e)}")
