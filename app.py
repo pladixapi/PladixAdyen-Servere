@@ -1,11 +1,10 @@
 from flask import Flask, request, jsonify
-import json
 from encryptor import encryptor
 
 app = Flask(__name__)
 
 @app.route(/encrypt, methods=[POST])
-def encrypt():
+def encrypt_endpoint():
     try:
         data = request.get_json()
         
