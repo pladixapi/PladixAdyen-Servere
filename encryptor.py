@@ -6,8 +6,6 @@ from cryptography.hazmat.primitives.ciphers.aead import AESCCM
 import pytz
 import json
 import base64
-from cryptography.hazmat.backends import default_backend
-
 
 class encryptor:
     def __init__(self, adyen_public_key, adyen_version=_0_1_8, adyen_prefix=adyenjs):
