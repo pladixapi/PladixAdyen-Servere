@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from encryptor import encryptor
 
@@ -25,9 +26,10 @@ def encrypt_endpoint():
         return jsonify({"success": False, "error": str(e)})
 
 if __name__ == "__main__":
-    print("Starting Flask server...")
+    port = int(os.environ.get("PORT", 80))
+    print(f"Starting Flask server on port {port}...")
     try:
-        app.run(host=0.0.0.0, port=80)
-        print("Flask server is running.")
+        app.run(host=0.0.0.0, port=port)
+        print(f"Flask server is running on port {port}")
     except Exception as e:
         print(f"Failed to start Flask server: {str(e)}")
