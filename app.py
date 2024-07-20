@@ -9,7 +9,6 @@ class Encrypt:
         try:
             data = json.loads(web.data())
             
-            # Obtendo a chave e a versão do Adyen do corpo da requisição POST
             adyen_key = data.get("adyen_key", "null")  # Chave Adyen
             adyen_version = data.get("adyen_version", "_0_1_8")  # Versão Adyen
             
@@ -18,7 +17,6 @@ class Encrypt:
             month = data.get("month")
             year = data.get("year")
             
-            # Inicializando o encryptor com a chave e a versão fornecidas
             enc = encryptor(adyen_key, adyen_version=adyen_version)
             encrypted_data = enc.encrypt_card(card, cvv, month, year)
             
@@ -30,4 +28,4 @@ class Encrypt:
 app = web.application(urls, globals())
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=80)
