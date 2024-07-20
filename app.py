@@ -31,6 +31,6 @@ app = web.application(urls, globals())
 print("Application configured, ready to run.")
 
 if __name__ == "__main__":
-    print("Starting server on port 80")
+    print("Starting server on port 80...")
     app.run(port=80)
     print("Server is running on port 80")
