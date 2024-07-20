@@ -1,40 +1,29 @@
-import web
+from flask import Flask, request, jsonify
 import json
-from encryptor import encryptor  # Certifique-se de que a classe encryptor esteja no mesmo diretório ou instalada como um pacote
+from encryptor import encryptor
 
-print("Import successful.")
-urls = ("/encrypt", "Encrypt")
+app = Flask(__name__)
 
-class Encrypt:
-    def POST(self):
-        try:
-            data = json.loads(web.data())
-            
-            adyen_key = data.get("adyen_key", "null")  # Chave Adyen
-            adyen_version = data.get("adyen_version", "_0_1_8")  # Versão Adyen
-            
-            card = data.get("card")
-            cvv = data.get("cvv")
-            month = data.get("month")
-            year = data.get("year")
-            
-            # Inicializando o encryptor com a chave e a versão fornecidas
-            enc = encryptor(adyen_key, adyen_version=adyen_version)
-            encrypted_data = enc.encrypt_card(card, cvv, month, year)
-            
-            return json.dumps({"success": True, "data": encrypted_data})
+@app.route(/encrypt, methods=[POST])
+def encrypt():
+    try:
+        data = request.get_json()
         
-        except Exception as e:
-            return json.dumps({"success": False, "error": str(e)})
-
-print("Configuring web.py application...")
-app = web.application(urls, globals())
-print("Application configured, ready to run.")
+        adyen_key = data.get("adyen_key", "null")
+        adyen_version = data.get("adyen_version", "_0_1_8")
+        
+        card = data.get("card")
+        cvv = data.get("cvv")
+        month = data.get("month")
+        year = data.get("year")
+        
+        enc = encryptor(adyen_key, adyen_version=adyen_version)
+        encrypted_data = enc.encrypt_card(card, cvv, month, year)
+        
+        return jsonify({"success": True, "data": encrypted_data})
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
 
 if __name__ == "__main__":
-    print("Starting server on port 80...")
-    try:
-        app.run(port=80)
-    except Exception as e:
-        print(f"Failed to start server: {str(e)}")
-    print("Server is running on port 80")
+    app.run(host=0.0.0.0)
