@@ -2,6 +2,7 @@ import web
 import json
 from encryptor import encryptor  # Certifique-se de que a classe encryptor esteja no mesmo diretório ou instalada como um pacote
 
+print("Import successful.")
 urls = ("/encrypt", "Encrypt")
 
 class Encrypt:
@@ -32,5 +33,8 @@ print("Application configured, ready to run.")
 
 if __name__ == "__main__":
     print("Starting server on port 80...")
-    app.run(port=80)
+    try:
+        app.run(port=80)
+    except Exception as e:
+        print(f"Failed to start server: {str(e)}")
     print("Server is running on port 80")
